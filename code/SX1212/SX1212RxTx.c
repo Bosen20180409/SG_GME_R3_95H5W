@@ -323,6 +323,7 @@ void OnMasterWireless(void)
 		if(nCountChange == 0)
 		{
 			printf("[%s:%d]standby...\r\n",__FUNCTION__,__LINE__);
+			Led0_Off;
 			SetRFMode(RF_STANDBY);
 			WKUP_Init( );
 			nCountChange = RF_STOP_WORK_TIME;

@@ -20,8 +20,8 @@
 
 #define PinLed0	    GPIO_Pin_15
 #define PortLed0	  GPIOA
-#define	Led0_Off    PortLed0->BSRR = PinLed0   //PD2   								    
-#define	Led0_On     PortLed0->BRR = PinLed0 
+#define	Led0_On    PortLed0->BSRR = PinLed0   //PD2   								    
+#define	Led0_Off     PortLed0->BRR = PinLed0 
 
 #define PinLedPs3	    GPIO_Pin_12
 #define PortLedPs3	  GPIOC

@@ -70,7 +70,8 @@ void SysLoop(void)
 				STM32_TIM2_Config( ); 
 				printf("==============================\r\n");	
 				printf("==============================\r\n");	
-	
+				Led0_On;
+
 				MainPro = STEP02;
 //				MainPro = STEP09;			
 				break;
