@@ -55,7 +55,7 @@ void SPI1_Init(void)
   GPIO_InitTypeDef  GPIO_InitStructure;  		  
 	  
   GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
-  GPIO_InitStructure.GPIO_Speed = GPIO_Speed_2MHz;
+  GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
 	
 	GPIO_InitStructure.GPIO_Pin = PIN_NSS_CONFIG;
   GPIO_Init(PORT_NSS_CONFIG, &GPIO_InitStructure);

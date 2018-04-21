@@ -96,10 +96,10 @@ u8 ButtonSrcDataTable[40] = {0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
 void DataConversationUsb(u8* SrcBuf,u8* DesBuf)
 {
 
-	u8 SrcDataBuf[40];		
+//	u8 SrcDataBuf[40];		
 	
 	u8 i = 0;
-	u8 j = 0;
+//	u8 j = 0;
 											
 	for(i=0;i<40;i++)
 	{
@@ -365,13 +365,13 @@ extern void Ps3SendButtonData(void);
 //#define RX_DEBUG
 void OnMasterUsbPC(void)
 {	
-	u8 ReturnCode = 0xff;
+//	u8 ReturnCode = 0xff;
 	u8 ChangeFlag = 0;
 	static u16 nCount = 0;
-	static u32 Data = 0;
+//	static u32 Data = 0;
 //	static u8 LastDataBuf[6];
-	u8 CurDataBuf[6];
-	static u32 nCountChange = 0;
+//	u8 CurDataBuf[6];
+//	static u32 nCountChange = 0;
 	u8 i = 0;
 //	u8 j = 0;
 	
@@ -389,14 +389,14 @@ void OnMasterUsbPC(void)
 	
 	if(ChangeFlag > 0)
 	{
-		if(nCountTimeHeartBeatRx == 0)
-		{
-			nCountChange = RF_WORK_MAX_TIME;
-		}
-		else
-		{
-			nCountChange = USB_WORK_MAX_TIME;
-		}
+//		if(nCountTimeHeartBeatRx == 0)
+//		{
+//			nCountChange = RF_WORK_MAX_TIME;
+//		}
+//		else
+//		{
+//			nCountChange = USB_WORK_MAX_TIME;
+//		}
 	#ifdef RX_DEBUG
 		printf("[%s:%d]rev data...change_idx:%d\r\n",__FUNCTION__,__LINE__,ChangeFlag);
 		printf("00 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19");

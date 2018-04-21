@@ -49,8 +49,8 @@ extern u16 TimeTable[ ];
 void TIM2_IRQHandler(void)
 { 
 
-	static u16 nCount = 0;
-	u8 i = 0; 
+//	static u16 nCount = 0;
+//	u8 i = 0; 
 /*=============================================================*/		
   if(TIM_GetITStatus(TIM2,TIM_IT_Update)!=RESET)
 	{	

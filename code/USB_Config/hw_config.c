@@ -643,7 +643,6 @@ void AddButtonDataP2(u8 Index)
 
 void Ps3SendButtonData(void)
 {
-	u8 i = 0;
 	if (bDeviceState == CONFIGURED)	
 	{
 		/* Write the descriptor through the endpoint */
@@ -652,6 +651,8 @@ void Ps3SendButtonData(void)
 //		SetEPTxValid(ENDP1);	
 //		PrevXferComplete = 0;		
 			#if 0
+			{
+				u8 i = 0;
 				printf("[%s:%d]usb tx data...\r\n",__FUNCTION__,__LINE__);
 				printf("00 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19");
 				printf("\r\n");
@@ -660,6 +661,7 @@ void Ps3SendButtonData(void)
 					printf("%x  ",Ps3ButtonDataBufferP2[i]);			
 				}	
 				printf("\r\n\r\n");
+			}
 			#endif		
 		delay_ms(9);	
 		USB_SIL_Write(EP1_IN, (uint8_t*) Ps3ButtonDataBufferP1, Ps3DataBufferSize); //Ps3DataBufferSize
