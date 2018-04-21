@@ -55,7 +55,7 @@ void SPI1_Init(void)
   GPIO_InitTypeDef  GPIO_InitStructure;  		  
 	  
   GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
-  GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+  GPIO_InitStructure.GPIO_Speed = GPIO_Speed_2MHz;
 	
 	GPIO_InitStructure.GPIO_Pin = PIN_NSS_CONFIG;
   GPIO_Init(PORT_NSS_CONFIG, &GPIO_InitStructure);
@@ -106,16 +106,15 @@ u8 SPIInit(void)
 }	
 u8 SPIClock(u8 level) 
 {
+	delay_us(1);
 	if(level == 0)
 	{
-		SCK_0;
-		
+		SCK_0;		
 	}
 	else
 	{
-		SCK_1;
-	}	
-	delay_us(1);
+		SCK_1;		
+	}		
 	return 0;
 }
 u8 SPIMosi(u8 level) 
@@ -128,6 +127,7 @@ u8 SPIMosi(u8 level)
 	{
 		MOSI_1;
 	}
+//	delay_us(1);
 	return 0;
 }	
 u8 SPINssData(u8 level)  
@@ -135,11 +135,13 @@ u8 SPINssData(u8 level)
 	if(level == 0)
 	{
 		NSS_DATA_0;
+		delay_us(1);
 	}
 	else
 	{
+		delay_us(1);
 		NSS_DATA_1;
-	}	
+	}
 	return 0;
 }	
 u8 SPINssConfig(u8 level)
@@ -152,10 +154,12 @@ u8 SPINssConfig(u8 level)
 	{
 		NSS_CONFIG_1;
 	}	
+	delay_us(1);
 	return 0;
 }
-u8 SPIMisoTest(void)
+u8 SPIMisoRead(void)
 {
+	delay_us(1);
   if(GPIO_ReadInputDataBit(PORT_MISO,PIN_MISO)==0)
   {
     return 0;
@@ -293,65 +297,19 @@ void SetFeq(u8 F)
 
 u16 RegistersCfg[] = // SX1212 configuration registers values
 { 
-//	DEF_MCPARAM1        | 0x0C,  //00                 
-//	DEF_MCPARAM2        | 0x24,  //01                    
-//	DEF_FDEV            | 0x03,  //02
-//	DEF_BITRATE_MSB     | 0x07,  //03
-//	DEF_BITRATE_LSB     | 0x1F,  //04   
-
-//	DEF_MCPARAM6        | 0xC6,  //05                  
-//	DEF_R1              | 0x6B,  //06                          
-//	DEF_P1              | 0x2A,  //07                        
-//	DEF_S1              | 0x00,  //08     
-//	
-//	DEF_R2              | 0x8F,  //09                          
-//	DEF_P2              | 0x38,  //0a                         
-//	DEF_S2              | 0x37,  //0b                      
-//	
-//	DEF_FIFOCONFIG      | 0x0F,  //0c
-//	DEF_IRQPARAM1       | 0x00,  //0d                  
-//	DEF_IRQPARAM2       | 0x09,  //0e             
-//	DEF_RSSIIRQTHRESH   | 0x00,  //0f             
-//	
-//	DEF_RXPARAM1        | 0xA3,  //10                    
-//	DEF_RXPARAM2        | 0x38,  //11                   
-//	DEF_RXPARAM3        | 0x18,  //12                    
-//	DEF_OOKFLOORTHRESH  | 0x04,  //13                   
-//		//RSSI Value (Read only)   //14             
-//	DEF_RXPARAM6        | 0x00,  //15                  
-//	
-//	DEF_SYNCBYTE1       | 0x00,  //16                 
-//	DEF_SYNCBYTE2       | 0x00,  //17                 
-//	DEF_SYNCBYTE3       | 0x00,  //18                 
-//	DEF_SYNCBYTE4       | 0x00,  //19                 
-//	
-//	DEF_TXPARAM         | 0x72,  //1a         
-//	
-//	DEF_OSCPARAM        | 0xBC,  //1b                  
-
-//	DEF_PKTPARAM1       | 0x00,  //1c              
-//	DEF_NODEADRS        | 0x00,  //1d     
-//	DEF_PKTPARAM3       | 0x48,  //1e            
-//	DEF_PKTPARAM4       | 0x00   //1f		
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	DEF_MCPARAM1 | RF_MC1_STANDBY | RF_MC1_BAND_430470 | RF_MC1_SUBBAND_FIRST,   //00                 
+//#define RF_MC1_BAND_300330               0x00
+//#define RF_MC1_BAND_320350               0x04
+//#define RF_MC1_BAND_350390               0x08
+//#define RF_MC1_BAND_390430               0x0C
+//#define RF_MC1_BAND_430470               0x10
+//#define RF_MC1_BAND_470510               0x14
+	DEF_MCPARAM1 | RF_MC1_STANDBY | RF_MC1_BAND_390430 | RF_MC1_SUBBAND_FIRST,   //00                 
 	DEF_MCPARAM2 | RF_MC2_DATA_MODE_PACKET | RF_MC2_MODULATION_FSK | RF_MC2_OOK_THRESH_TYPE_PEAK | RF_MC2_GAIN_IF_00,  //01                    
 	DEF_FDEV | RF_FDEV_100,//02
 	DEF_BITRATE_MSB | RF_BITRATE_MSB_20000,//03
 	DEF_BITRATE_LSB | RF_BITRATE_LSB_20000, //04   
 
-	DEF_MCPARAM6 | RF_MC6_PARAMP_11 | RF_MC6_LOW_POWER_RX_OFF | RF_MC6_VCO_TRIM_11 | RF_MC6_RPS_SELECT_1, //05                  
+	DEF_MCPARAM6 | RF_MC6_PARAMP_11 | RF_MC6_LOW_POWER_RX_OFF | RF_MC6_VCO_TRIM_01 | RF_MC6_RPS_SELECT_1, //05                  
 	DEF_R1 | 0x8f,  //06                          
 	DEF_P1 | 0x39,    //07                        
 	DEF_S1 | 0x37,     //08     
@@ -653,7 +611,7 @@ u16 ReadRegister(u8 address)
 ** In  : *buffer, size                                            **
 ** Out : *pReturnCode                                             **
 *******************************************************************/
-void SendRfFrame(u8 *buffer, u8 size, u8 *pReturnCode)
+ void SendRfFrame(u8 *buffer, u8 size, u8 *pReturnCode)
 {
 	u32 nCountTime = 0;
 	
@@ -689,6 +647,7 @@ void SendRfFrame(u8 *buffer, u8 size, u8 *pReturnCode)
 		{
 			Handle_Irq_Pa1 ( );
 //			delay_ms(5);
+			Led0_On;
 			break;
 		}
 		else
@@ -698,7 +657,8 @@ void SendRfFrame(u8 *buffer, u8 size, u8 *pReturnCode)
 			if(nCountTime > 100)
 			{
 				nCountTime = 0;
-				printf("[%s:%d]Timeout...\r\n",__FUNCTION__,__LINE__);	
+				printf("[%s:%d]Timeout...\r\n",__FUNCTION__,__LINE__);
+				Led0_Reverse( );				
 				break;
 			}
 		}
@@ -1026,49 +986,50 @@ u8 ReceiveByte(void)
 
 	SPIClock(0);
 	SPIClock(1);
-	if (SPIMisoTest())
+	if (SPIMisoRead())
 	{
+		
 		inputByte |= 0x80;
 	}
 	SPIClock(0);
 	SPIClock(1);
-	if (SPIMisoTest())
+	if (SPIMisoRead())
 	{
 		inputByte |= 0x40;
 	}
 	SPIClock(0);
 	SPIClock(1);
-	if (SPIMisoTest())
+	if (SPIMisoRead())
 	{
 		inputByte |= 0x20;
 	}
 	SPIClock(0);
 	SPIClock(1);
-	if (SPIMisoTest())
+	if (SPIMisoRead())
 	{
 		inputByte |= 0x10;
 	}
 	SPIClock(0);
 	SPIClock(1);
-	if (SPIMisoTest())
+	if (SPIMisoRead())
 	{
 		inputByte |= 0x08;
 	}
 	SPIClock(0);
 	SPIClock(1);
-	if (SPIMisoTest())
+	if (SPIMisoRead())
 	{
 		inputByte |= 0x04;
 	}
 	SPIClock(0);
 	SPIClock(1);
-	if (SPIMisoTest())
+	if (SPIMisoRead())
 	{
 		inputByte |= 0x02;
 	}
 	SPIClock(0);
 	SPIClock(1);
-	if (SPIMisoTest())
+	if (SPIMisoRead())
 	{
 		inputByte |= 0x01;
 	}
@@ -1217,7 +1178,7 @@ u8 SpiInOut (u8 outputByte)
 			SPIMosi(0);
 		}
 		SPIClock(1);
-		if (SPIMisoTest())
+		if (SPIMisoRead())
 		{
 			inputByte |= bitCounter;
 		}

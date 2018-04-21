@@ -196,14 +196,14 @@ void SetFeq(u8 F);
 //#define SPIMosi(level)      ((level) ? (PORTO |= MOSI) : (PORTO &= ~MOSI))
 //#define SPINssData(level)   ((level) ? (PORTO |= NSS_DATA) : (PORTO &= ~NSS_DATA))
 //#define SPINssConfig(level) ((level) ? (PORTO |= NSS_CONFIG) : (PORTO &= ~NSS_CONFIG))
-//#define SPIMisoTest()       (PORTI & MISO)
+//#define SPIMisoRead()       (PORTI & MISO)
 
 //#define SPIInit()           
 //#define SPIClock(level)     
 //#define SPIMosi(level)     
 //#define SPINssData(level)   
 //#define SPINssConfig(level)
-//#define SPIMisoTest()       
+//#define SPIMisoRead()       
 
 /*******************************************************************
 ** SX1212 definitions                                             **
